@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block header %}
+<h1>Phonebook</h1>
+{% if current_user.is_authenticated %}
+<h5>Welcome Back: {{ current_user.username.title() }}!</h5>
+{% else %}
+<h5>Please Sign Up or Log In to Create or Update Address Books</h5>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12 col-lg-14 order-1 order-lg-0">
+        <div class="container mt-2">
+            <!-- https://flask-table.readthedocs.io/en/stable/ -->
+            </table>
+            <thead class="thead-dark">
+                <table
+                    class="table table-bordered - table-group-divider - table-hover - text-bg-light">
+                    <thead>
+                        <tr>
+                            <th>Lastname</th>
+                            <th>Firstname</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Date Added</th>
+                            <th>User ID | User Name</th>
+                        </tr>
+                    </thead>
+                    {% for address in addresses %}
+                    <tbody>
+                        <tr>
+                            <td>{{ address.last_name }}</td>
+                            <td>{{ address.first_name }}</td>
+                            <td>{{ address.phone }}</td>
+                            <td>{{ address.address }}</td>
+                            <td>{{ address.date_created }}</td>
+                            <td>{{ address.user.username }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
